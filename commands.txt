@@ -1,0 +1,36 @@
+// git commands
+git init
+git branch -m main
+git add .
+git commit -m 'first commit with initial api'
+git remote add origin https://github.com/die711/fastapi-task-api-auth-pytest.git
+git push origin -u main
+git pull
+
+
+// python, pip commands
+python -m venv .env
+pip freeze  > requirements.txt
+pip install sqlalchemy
+pip install mysql-connector-python
+pip install passlib[bcrypt]
+pip install pytest
+pip install httpx pytest.asyncio
+pip install -r requirements.txt
+
+//uvicorn server
+uvicorn tasks.api:app --reload
+
+
+//udemy course
+https://www.udemy.com/course/primeros-pasos-con-fastapi/?couponCode=ST10MT8624
+
+//sql
+INSERT INTO `tasks`.`users` (`name`, `surname`, `email`, `website`) VALUES ('andres', 'cruz', 'di_564@hotmail.com', 'http://desarrollo.net');
+INSERT INTO `tasks`.`categories` (`name`) VALUES ('cate 1');
+
+//pytest
+pytest .\test\test_math_operations.py
+pytest .\test_fixture.py -v
+pytest .\tasks\test\test_user.py::test_logout
+pytest .\tasks\test\test_user.py::test_logout -s
