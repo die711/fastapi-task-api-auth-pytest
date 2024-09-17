@@ -9,6 +9,12 @@ from tasks.dataexamples import task_with_orm
 task_router = APIRouter()
 
 
+@task_router.get('/paginate', status_code =status.HTTP_200_OK)
+def get_paginated(page: int = Query(1, gt=0), size: int = Query(10, gt=0)
+                  , db: Session = Depends(get_database_session)):
+    return crud.pagination(page, size, db)
+
+
 @task_router.get('/', status_code=status.HTTP_200_OK)
 def get(db: Session = Depends(get_database_session)):
     tasks_db = crud.get_all(db)

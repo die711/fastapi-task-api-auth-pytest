@@ -17,7 +17,9 @@ class Task(Base):
     status = Column(Enum(StatusType))
     category_id = Column(Integer, ForeignKey('categories.id'), nullable=False)
     user_id = Column(Integer, ForeignKey('users.id'), nullable=False)
+
     created = Column(DateTime(timezone=True), server_default=func.now())
+    updated = Column(DateTime(timezone=True), onupdate=func.now())
 
     category = relationship('Category', lazy='joined', back_populates='tasks')
     user = relationship('User', lazy='joined', back_populates='tasks')

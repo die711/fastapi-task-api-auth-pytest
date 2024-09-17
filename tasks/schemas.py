@@ -71,20 +71,14 @@ class TaskRead(TaskBase):
     id: int = Field(gt=0)
     user_id: int = Field(gt=0)
 
-    created_at: datetime
-    updated_at: datetime
+    created: datetime
+    updated: datetime | None
 
 
-class TaskReadComplete(TaskBase):
-    id: int = Field(gt=0)
-    user_id: int = Field(gt=0)
-
+class TaskReadComplete(TaskRead):
     user: UserRead
     category: Category
     tags: List[Tag]
-
-    created_at: datetime
-    updated_at: datetime | None
 
 
 class TaskWrite(TaskBase):

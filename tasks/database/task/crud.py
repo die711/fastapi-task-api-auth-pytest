@@ -1,12 +1,19 @@
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session, load_only
 from fastapi import HTTPException, status
 
-from tasks.schemas import TaskWrite, TaskRead
+from tasks.database.pagination import PageParams, paginate
+from tasks.schemas import TaskWrite, TaskReadComplete
 from tasks.database import models
 
 
 def get_all(db: Session):
+    # return db.query(models.Task).options(load_only(models.Task.name, models.Task.description)).all()
     return db.query(models.Task).all()
+
+
+def pagination(page: int, size: int, db: Session):
+    page_params = PageParams(page=page, size=size)
+    return paginate(page_params, db.query(models.Task), TaskReadComplete)
 
 
 def get_by_id(id: int, db: Session):
