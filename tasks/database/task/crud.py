@@ -13,7 +13,7 @@ def get_all(db: Session):
 
 def pagination(page: int, size: int, db: Session):
     page_params = PageParams(page=page, size=size)
-    return paginate(page_params, db.query(models.Task), TaskReadComplete)
+    return paginate(page_params, db.query(models.Task).filter(models.Task.id > 2), TaskReadComplete)
 
 
 def get_by_id(id: int, db: Session):
